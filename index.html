@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>form</title>
+        <style>
+              body{
+                background-color: #1D1D1D;
+                
+            }
+            .myForm table{
+                width: 50% !important;
+            }
+            .myForm input:not(.myForm input[type="submit"]),.myForm textarea{
+                background-color: #2B2B2B;
+                border:none;
+                width: 100%;
+                height: 50px;
+                padding-left: 20px;
+            }
+            .myForm input:focus,.myForm textarea:focus{
+                outline: none !important;
+                
+            }
+            input{
+                color:#fff;
+            }
+            input::placeholder{
+                color:#fff;
+            }
+            textarea::placeholder{
+                color: #fff;
+            }
+            textarea{
+                color: #fff;
+            }
+            .err{
+                color:red;
+            }
+            .a21{
+                width: 210px;
+                height: 50px;
+                border-radius: 0px;
+                border: none;
+                background-color: transparent;
+                outline: 1px solid #08fcd7;
+                color: #08fcd7;
+                float: right;
+                position: relative;
+                overflow: hidden;
+                
+            }
+            .a21 >div{
+                width: 230px;
+                height: 50px;
+                background-color: #08fcd7;
+                position: absolute;
+                top: 0px;
+                left: -250px;
+                transform: skewX(-20deg);
+                transition: all 0.2s linear;
+                z-index: 900;
+                
+               
+
+            }
+            .a21:hover >div{
+                left: -10px;
+                cursor: pointer;
+                
+            }
+            .a21:hover >span{
+                color: #1D1D1D;
+            }
+            .a21 > span{
+                position: relative;
+                z-index: 1000;
+                transition: all 0.2s linear;
+            }
+            input ~ span::after{
+                content: "";
+                display: block;
+                width: 0%;
+                height: 2px;
+                background-color: #08FDD8;
+                transition: all 0.3s ease-out;
+            }
+            input:focus ~ span::after {
+                width: 108%;
+                
+            }
+            textarea ~ span::after{
+                content: "";
+                display: block;
+                width: 0%;
+                height: 2px;
+                background-color: #08FDD8;
+                transition: all 0.3s ease-out;
+            }
+            textarea:focus ~ span::after {
+                width: 108%;
+                
+            }
+            td{
+                overflow: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <form class="myForm" onsubmit="return mySubmit()">
+            <table border="0" cellspacing="10" cellpadding="10">
+                <tr>
+                    <td>
+                        <input type="text" name="fname" placeholder="Name">
+                        <span class="err err_fname"></span>
+                    </td>
+                    <td>
+                        <input type="email" name="email" placeholder="Email" id="email">
+                        <span id="erremail" class="err err_email"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input data-myattr="subject" type="text" name="subject" placeholder="Subject">
+                        <span class="err err_subject"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <textarea name="message" placeholder="Message"></textarea>
+                        <span class="err err_msg"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                    
+                        <button class="a21" type="submit">
+                           <span>send message!</span> 
+                            <div></div>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </form>  
+        <script>
+           
+            function mySubmit(){
+                
+
+                var n = document.querySelector('input[name="fname"]').value;
+                var e = document.getElementById('email').value;
+                var s = document.querySelector("[data-myattr='subject']").value;
+                let m = document.querySelector('[name="message"]').value;
+                
+
+                
+                var isValid = true;
+                if(n == ''){
+                    document.querySelector('.err_fname').innerHTML = 'Please Enter your Name';
+                    isValid = false;
+                }
+                if(e == ''){
+                    document.querySelector('#erremail').innerHTML = 'Please Enter your Email';
+                    isValid = false;
+                }
+                if(s == ''){
+                    document.querySelector('.err_subject').innerHTML = 'Please Enter your Subject';
+                    isValid = false;
+                }
+                if(m == ''){
+                    document.querySelector('.err_msg').innerHTML = 'Please Enter your Message';
+                    isValid = false;
+                }
+
+                if(isValid == true){
+                    return true
+                }else{
+                    return false;
+                }
+
+                
+            }
+        </script>     
+        
+    </body>
+</html>
